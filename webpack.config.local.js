@@ -6,6 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const MyReplaceLoaderPlugin = require('./my-replace-loader');
+var es3ifyPlugin = require('es3ify-webpack-plugin');
 
 
 
@@ -36,14 +37,6 @@ var exports = {
 				exclude: /node_modules/,
 				use:[
 					{loader: 'babel-loader'}
-				]
-			},
-			{
-				test: /\.js$/,
-				enforce: 'post', // post-loader处理
-				exclude: /node_modules/,
-				use:[
-					{loader: 'es3ify-loader'}
 				]
 			},
 			{
@@ -199,11 +192,12 @@ var exports = {
         ]),
 		new MyReplaceLoaderPlugin(replaceOtions),
 		new MyReplaceLoaderPlugin(replaceOtions),
-		// new OptimizeCSSPlugin({//css去重
-		// 	cssProcessorOptions: {
-		// 		safe: true
-		// 	}
-		// }),
+		new OptimizeCSSPlugin({//css去重
+			cssProcessorOptions: {
+				safe: true
+			}
+		}),
+        new es3ifyPlugin(),
 	]
 };
 

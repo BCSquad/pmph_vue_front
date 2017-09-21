@@ -209,7 +209,7 @@ var exports = {
 if(outputConfig.IS_DEBUG){
     exports['devtool'] = "source-map";//source map
 }else{//正式环境开启压缩js
-	exports['plugins'].push(
+	exports.plugins.push(
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				properties: false,
