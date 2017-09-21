@@ -1,0 +1,28 @@
+@import "../../common/sass/index.scss";
+
+.footer{
+  color:$footer-color;
+  background-color: $footer-bg-color;
+  border-top:1px solid $border-color;
+}
+.footerTitle{
+  color:$color-blue;
+}
+.footerList>ul{
+  float: left;
+  width: 33.33%;
+
+  &>li{
+    line-height: 2;
+
+    &:before{
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      width: 6px;
+      height: 6px;
+      background: $color-blue;
+      margin-right: 10px;
+    }
+  }
+}

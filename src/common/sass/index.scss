@@ -1,0 +1,207 @@
+/*入口文件*/
+
+/*公共变量，方法*/
+@import "./_variables.scss";
+@import "./_functions.scss";
+@import "./_mixins.scss";
+
+/*公共组件样式*/
+@import "./components/_button.scss";
+@import "components/_forms.scss";
+@import "./components/_table.scss";
+
+
+/*=================================================================
+  padding margin
+  =================================================================*/
+@for $i from 0 through 60{
+  @if $i % 10 == 0 {
+    .paddingT#{$i}{padding-top: #{$i}px}
+    .paddingL#{$i}{padding-left: #{$i}px}
+    .paddingR#{$i}{padding-right: #{$i}px}
+    .paddingB#{$i}{padding-bottom: #{$i}px}
+    .marginT#{$i}{margin-top: #{$i}px}
+    .marginL#{$i}{margin-left: #{$i}px}
+    .marginR#{$i}{margin-right: #{$i}px}
+    .marginB#{$i}{margin-bottom: #{$i}px}
+    .padding#{$i}{padding: #{$i}px}
+    .margin#{$i}{margin: #{$i}px}
+  }
+}
+/*=================================================================
+  font-size
+  =================================================================*/
+@for $i from 12 through 28{
+  @if $i % 2 == 0 {
+    .fontSize#{$i}{font-size: #{$i}px}
+  }
+}
+/*=================================================================
+  link
+  =================================================================*/
+a {
+  color: nth($link-color,1);
+  transition: all .3s;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  color: nth($link-color,2);
+  //text-decoration: none;
+}
+a:visited {
+  color: nth($link-color,3);
+  text-decoration: none !important;
+}
+a:active {
+  color: nth($link-color,3);
+  text-decoration: none !important;
+}
+
+/*=================================================================
+  list
+  =================================================================*/
+.list-square {
+  margin: 0;
+  padding: 0;
+}
+
+.list-square li {
+  padding: 5px 0 5px 20px;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid #ddd;
+  /*background: url(../images/dot.jpg) 3px 16px no-repeat;*/
+}
+
+
+.ul-no-style{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ul-no-style li{
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.ul-center {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  /* For IE, the outcast */
+  zoom:1;
+  *display: inline;
+}
+.ul-center li {
+  float: left;
+  padding: 0px;
+}
+
+.normal-list {
+  border-top: 1px dotted #c3b592;
+}
+
+.normal-list li {
+  border-bottom: 1px dotted #c3b592;
+  padding: 6px 0 6px 12px;
+}
+/*=================================================================
+  其他始化
+  =================================================================*/
+.cut-line{
+  display: block;
+  margin: 30px 0;
+  width: 100%;
+  height:0;
+  border-bottom: 1px solid $border-color;
+}
+
+/**
+  初始化布局
+*/
+html{
+  height:100%;
+}
+body{
+  min-height:100%;
+  margin:0;
+  padding:0;
+  position:relative;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+.wrapper{
+  min-height:100%;
+  .header{
+    
+  }
+  .page-main{
+    padding-bottom:380px;
+  }
+  .footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:380px;
+  }
+  .content{
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .content-full{
+    width: 100%;
+    max-width: none;
+  }
+}
+
+
+/**
+  公用样式
+ */
+
+/*清除浮动*/
+.clearfix{
+  @include clearfix;
+}
+
+/*加载文字后面的...动画*/
+.loading-ellipsis:after {
+  overflow: hidden;
+  display: inline-block;
+  font-size: 20px;
+  vertical-align: bottom;
+  animation: ellipsis-animate 2s infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+}
+@keyframes ellipsis-animate {
+  from {
+    width: 2px;
+  }
+  to {
+    width: 28px;
+  }
+}
+
+/*引用；用来设定一段较长的文字段落样式*/
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: .5em 10px;
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: .1em;
+  margin-right: .25em;
+  vertical-align: -.4em;
+}
+blockquote p {
+  display: inline;
+}

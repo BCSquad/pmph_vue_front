@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    ${require('components/commonHeader/index.html')}
+    <title>Title</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+</head>
+<body>
+<div class="wrapper">
+    ${require('components/nav-header/index.html')}
+
+    <!--页面主体部分-->
+    <div class="page-main clearfix">
+
+        <h1 class="loading-ellipsis">首页 demo</h1>
+        <ul id="example"></ul>
+        <div>
+            <button type="button" class="btn btn-success" data-type="success">（成功）Success</button>
+            <button type="button" class="btn btn-info" data-type="info">（一般信息）Info</button>
+            <button type="button" class="btn btn-warning" data-type="warning">（警告）Warning</button>
+            <button type="button" class="btn btn-danger" data-type="error">（错误）Error</button>
+        </div>
+
+    </div>
+
+    ${require('components/footer/index.html')}
+</div>
+
+<!--公共外链js文件-->
+${require('components/commonScript/index.html')}
+</body>
+</html>
