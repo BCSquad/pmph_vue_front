@@ -22,7 +22,7 @@ $(function () {
 	 * 登录按钮点击事件
 	 */
 	$("#loginBtn").on('click',function () {
-		Ipmph.message.info('我还没做登录功能！');
+		Ipmph.message.info('还没做登录功能！');
 	})
 
 })
