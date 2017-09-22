@@ -6,15 +6,25 @@
     ${require('components/commonHeader/index.html')}
 </head>
 <body>
-<div class="wrapper">
-    ${require('components/nav-header/index.html')}
-
-    <!--页面主体部分-->
-    <div class="page-main">
-            <h1>登录页面 demo</h1>
+<div class="login_page">
+    <div class="login-page-inner">
+        <div class="input-text-wrapper">
+            <div class="login-logo paddingB40"><img src="${require('../../common/images/logo-text.png')}" alt=""></div>
+            <input type="text" class="form-control" placeholder="请输入用户名">
+            <input type="text" class="form-control marginT10" placeholder="请输入密码">
+        </div>
+        <div class="input-text-wrapper marginT30 text-center">
+            <button type="button" class="btn loginBtn" id="loginBtn">登录</button>
+        </div>
+        <div class="login-note marginT30 lineHeight1">
+            <p>最高权限:root</p>
+            <p>主任:admin1</p>
+            <p>项目编辑:admin2</p>
+            <p>策划编辑:admin3</p>
+            <p>密码任意</p>
+        </div>
     </div>
-
-    ${require('components/footer/index.html')}
+    <div id="canvas"></div>
 </div>
 
 <!--公共外链js文件-->
