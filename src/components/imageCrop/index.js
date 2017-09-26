@@ -6,7 +6,7 @@ require('./plugins/css/jquery.Jcrop.min.css');
 
 require('./index.css');
 
-import {getObjectURL} from '../../libs/file'
+import {getObjectURL,getInputFile} from '../../libs/file'
 
 var imageCrop = (function () {
 	var context = {};
@@ -46,7 +46,7 @@ var imageCrop = (function () {
 			var image = new Image();
 			image.src = url;
             imageUrl = url;
-
+            getInputFile(this.fileBtn.get(0));
 			this.imageBox.empty().append(image);
 
 			image.onload=function () {
