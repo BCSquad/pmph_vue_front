@@ -78,5 +78,11 @@ $(function () {
 	imageCrop.show();
 
 
+
+    imageCrop.on('uploadImageSuccess',function (imageUrl) {
+		var image = new Image();
+        image.src = imageUrl;
+        $('.page-main').append(image)
+    })
 });
 
