@@ -100,7 +100,7 @@ var exports = {
 			},
 			{
 				test: /\.css$/,
-				include:[path.resolve(__dirname,'src/common')],
+				include:[path.resolve(__dirname,'src/common'),path.resolve(__dirname,'src/assets')],
 				use: [
 					{loader: 'style-loader'},
 					{
@@ -143,7 +143,7 @@ var exports = {
 			},
             {
                 test:/\.(jpe?g|png|gif)$/i,
-                include:[path.resolve(__dirname,'src/common'),path.resolve(__dirname,'src/components')],
+				exclude:path.resolve(__dirname,'src/pages'),
                 loader:'url-loader?hash=sha512&digest=hex&limit=5&name=static/common/images/[name][hash].[ext]'
             },
 			{

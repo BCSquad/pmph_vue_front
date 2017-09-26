@@ -54,7 +54,7 @@ require('../sass/layout.scss');
 // 	// 继承了Error类的对象
 // }
 
-
+var imageCrop = require('components/imageCrop/index.js')
 $(function () {
 	Ipmph.UserModel.on(Ipmph.UserModel.eventType.LOGIN_SUCCESS,function (data) {
 		console.log('接收到登录成功事件');
@@ -70,10 +70,13 @@ $(function () {
 
 	$('#example').jqPaginator(options);
 
-	$('.btn').on('click',function(){
+	$('.page-main .btn').on('click',function(){
 		var type = $(this).attr('data-type');
 
         Ipmph.message[type]('这是一段提示文字信息');
 	})
+	imageCrop.show();
+
 
 });
+
