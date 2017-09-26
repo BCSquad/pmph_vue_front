@@ -1,4 +1,6 @@
-
+/**
+ * Created by huang on 2017/9/26.
+ */
 require('./plugins/jquery.Jcrop.min');
 require('./plugins/css/jquery.Jcrop.min.css');
 
@@ -13,6 +15,7 @@ var imageCrop = (function () {
 	Ipmph.Events(context);
 
 	context.$cropWraper = $(require('./index.html'));
+	context.innerWrapper = context.$cropWraper.find('.imagecrop-box-inner');
 	context.closeBtn = context.$cropWraper.find('.close');
 	context.submitBtn = context.$cropWraper.find('#submitFileBtn');
 	context.fileBtn = context.$cropWraper.find('#imagecropFile');
@@ -28,6 +31,12 @@ var imageCrop = (function () {
 		//将元素插入文档
 		$('body').append(this.$cropWraper);
 		//事件绑定
+		this.$cropWraper.on('click',()=>{
+			this.hide();
+		});
+		this.innerWrapper.on('click',(event)=>{
+            event.stopPropagation();
+		});
 		this.closeBtn.on('click',()=>{
 			this.hide();
 		});
@@ -65,6 +74,10 @@ var imageCrop = (function () {
 
 		});
 		this.submitBtn.on('click',()=>{
+			if(!imageUrl){
+                Ipmph.message.error('请选择一张图片');
+                return false;
+			}
 			this.logdingShow();
             setTimeout(()=>{
                 this.trigger('uploadImageSuccess',imageUrl);
@@ -87,11 +100,15 @@ var imageCrop = (function () {
 	};
 	context.hide=function () {
 		this.$cropWraper.fadeOut(280);
+        $jcrop.destroy();
+        $jcrop = null;
+        this.imageBox.empty();
+        this.fileBtn.val('');
+        imageUrl=null;
         return this;
 	};
 	context.getImageUrl=function () {
 		return imageUrl;
-        return this;
 	};
 	context._setCropData=function(obj) {
 		$("#x").val(obj.x/this.scale);

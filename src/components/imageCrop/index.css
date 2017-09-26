@@ -89,3 +89,8 @@
 #imagecropImage-box>div{
 	margin: 0 auto;
 }
+
+/*重置插件背景颜色*/
+/*.jcrop-holder{*/
+	/*background: none;*/
+/*}*/

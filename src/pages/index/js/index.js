@@ -70,14 +70,14 @@ $(function () {
 
 	$('#example').jqPaginator(options);
 
-	$('.page-main .btn').on('click',function(){
+	$('.message').on('click',function(){
 		var type = $(this).attr('data-type');
 
         Ipmph.message[type]('这是一段提示文字信息');
-	})
-	imageCrop.show();
-
-
+	});
+	$('.uploadheadImage').on('click',function () {
+        imageCrop.show();
+    });
 
     imageCrop.on('uploadImageSuccess',function (imageUrl) {
 		var image = new Image();
