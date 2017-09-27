@@ -1,0 +1,49 @@
+.main_content_404{
+  text-align:center;
+  margin-top:60px;
+}
+.top_404{
+  padding:100px 0 70px;
+  background-color:#2dc9a7;
+  color:white;
+  text-align:center;
+}
+.top_404>div:first-child{
+  font-size:72px;
+}
+.returnIndex_page{
+  text-decoration:none;
+  color:#2dc9a7;
+  display:inline-block;
+  width:120px;
+  border:2px solid #2dc9a7;
+  border-radius:4px;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+  margin-top:20px;
+  cursor: pointer;
+}
+.reasonBox{
+  list-style-type:none;
+  color:#2dc9a7;
+  line-height:30px;
+  padding-left:0;
+  margin-bottom:0;
+}
+.title_404{
+  font-size:28px;
+  color:#2dc9a7;
+  font-weight:500;
+}
+.content_left_404{
+  display: inline-block;
+  text-align: left;
+}
+.content_right_404{
+  display: inline-block;
+  padding-left: 100px;
+  border-left: 1px solid #2dc9a7;
+  margin-left: 100px;
+  margin-top:-6px;
+}
