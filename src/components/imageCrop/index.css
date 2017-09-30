@@ -60,6 +60,7 @@
 	display: inline-block;
 	vertical-align: middle;
 	background: #fafafa;
+	border: 1px solid #bfbfbf;
 	border: 1px solid hsla(0,0%,47%,.5);
 	border-radius: 2px;
 	overflow: hidden;
@@ -78,6 +79,8 @@
 	z-index: 1;
 	width: 100%;
 	opacity: 0;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
 	cursor: pointer;
 	font-size: 50rem;
 }
