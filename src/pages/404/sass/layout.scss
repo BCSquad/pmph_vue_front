@@ -1,10 +1,9 @@
-.main_content_404{
-  text-align:center;
-  margin-top:60px;
-}
+@import "../../../common/sass/index.scss";
+
+
 .top_404{
   padding:100px 0 70px;
-  background-color:#2dc9a7;
+  background-color:$color-primary;
   color:white;
   text-align:center;
 }
@@ -13,10 +12,10 @@
 }
 .returnIndex_page{
   text-decoration:none;
-  color:#2dc9a7;
+  color:$color-primary;
   display:inline-block;
   width:120px;
-  border:2px solid #2dc9a7;
+  border:2px solid $color-primary;
   border-radius:4px;
   height:30px;
   line-height:30px;
@@ -24,16 +23,20 @@
   margin-top:20px;
   cursor: pointer;
 }
+.returnIndex_page:hover,.returnIndex_page:active,.returnIndex_page:active, .returnIndex_page:visited{
+  color:$color-primary;
+  text-decoration: none;
+}
 .reasonBox{
   list-style-type:none;
-  color:#2dc9a7;
+  color:$color-primary;
   line-height:30px;
   padding-left:0;
   margin-bottom:0;
 }
 .title_404{
   font-size:28px;
-  color:#2dc9a7;
+  color:$color-primary;
   font-weight:500;
 }
 .content_left_404{

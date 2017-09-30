@@ -79,7 +79,7 @@ $(function () {
         imageCrop.show();
     });
 
-    imageCrop.on('uploadImageSuccess',function (imageUrl) {
+    imageCrop.on('upload_success',function (imageUrl) {
 		var image = new Image();
         image.src = imageUrl;
         $('.page-main').append(image)

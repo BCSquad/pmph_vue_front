@@ -28,6 +28,21 @@
     .margin#{$i}{margin: #{$i}px}
   }
 }
+
+/*=================================================================
+  color
+  =================================================================*/
+.color-primary{color:$color-primary};
+
+.color-success{color:$color-success};
+.color-warning{color:$color-warning};
+.color-danger{color:$color-danger};
+.color-info{color:$color-info};
+.color-white{color:$color-white};
+.color-black{color:$color-black};
+.color-blue{color:$color-blue}
+
+
 /*=================================================================
   font-size
   =================================================================*/
@@ -229,6 +244,38 @@ body{
   }
   to {
     width: 28px;
+  }
+}
+/*鼠标悬浮显示提示文案*/
+.hoverTips{
+  position:relative;
+  &:hover:after{
+    content:attr(data-msg);
+    display: inline-block;
+    position:absolute;
+    font-size: $font-size-small;
+    line-height:30px;
+    text-align:center;
+    left:0;
+    top:-41px;
+    padding: 0 18px;
+    border-radius: 4px;
+    background: #1f2d3d;
+    color: $color-white;
+    transition: all .5s;
+    z-index: 101;
+    outline: none !important;
+  }
+  &:hover:before{
+    content: '';
+    display: inline-block;
+    @include arrow(bottom,8px,#1f2d3d);
+    position: absolute;
+    top: -12px;
+    left: 52px;
+    z-index: 100;
+    transition: all .5s;
+    outline: none !important;
   }
 }
 

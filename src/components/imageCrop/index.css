@@ -51,6 +51,10 @@
 	height: 280px;
 	width: 280px;
 }
+#imagecropImage-img{
+	max-width: 280px;;
+	max-height: 280px;
+}
 .imagecrop-box .upload-image-btn{
 	position: relative;
 	display: inline-block;
@@ -88,6 +92,26 @@
 }
 #imagecropImage-box>div{
 	margin: 0 auto;
+}
+
+.noSupportNoice{
+	display:none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #bfbfbf;
+	text-align: center;
+}
+.noSupportNoice>p{
+	display: inline-block;
+	text-align: left;
+	width: 80%;
+	margin-top: 90px;
+}
+.noSupportNoice a{
+	color:#268afa;
 }
 
 /*重置插件背景颜色*/

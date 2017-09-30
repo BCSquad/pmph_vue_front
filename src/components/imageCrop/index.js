@@ -1,12 +1,12 @@
 /**
  * Created by huang on 2017/9/26.
  */
-require('./plugins/jquery.Jcrop.min');
-require('./plugins/css/jquery.Jcrop.min.css');
+
+require('./plugins/cropper/cropper.min.css');
+require('./plugins/cropper/cropper.min.js');
 
 require('./index.css');
 
-import {getObjectURL,getInputFile} from '../../libs/file'
 
 var imageCrop = (function () {
 	var context = {};
@@ -14,112 +14,140 @@ var imageCrop = (function () {
 	//注入事件对象
 	Ipmph.Events(context);
 
-	context.$cropWraper = $(require('./index.html'));
-	context.innerWrapper = context.$cropWraper.find('.imagecrop-box-inner');
-	context.closeBtn = context.$cropWraper.find('.close');
-	context.submitBtn = context.$cropWraper.find('#submitFileBtn');
-	context.fileBtn = context.$cropWraper.find('#imagecropFile');
-	context.imageBox = context.$cropWraper.find('#imagecropImage-box');
-	context.loading = context.$cropWraper.find('.loading')
-	context.scale = 1;
-	//内部变量用于保存生成的image地址
-	var imageUrl = null;
+	//设个变量标识浏览器是否支持
+	var isSupport = true;
 
-	var $jcrop;
+	var $cropWraper = $(require('./index.html'));
+	var innerWrapper = $cropWraper.find('.imagecrop-box-inner');
+	var closeBtn = $cropWraper.find('.close');
+	var submitBtn = $cropWraper.find('#submitFileBtn');
+	var fileBtn = $cropWraper.find('#imagecropFile');
+	var cropImage = $cropWraper.find('#imagecropImage-img');
+	var loading = $cropWraper.find('.loading');
+	var noSupportNoice = $cropWraper.find('.noSupportNoice');
+
+	var cropperOption = {
+		dragMode: 'move',
+		aspectRatio: 1,
+		autoCropArea: 0.65,
+		restore: false,
+		viewMode: 1,
+		guides: true,
+		center: false,
+		highlight: false,
+		cropBoxMovable: true,
+		cropBoxResizable: true,
+		toggleDragModeOnDblclick: false,
+		ready: function () {
+		}
+	};
+	var cropper = new Cropper(cropImage.get(0), cropperOption);
 
 	context.init=function () {
 		//将元素插入文档
-		$('body').append(this.$cropWraper);
+		$('body').append($cropWraper);
 		//事件绑定
-		this.$cropWraper.on('click',()=>{
+		$cropWraper.on('click',()=>{
 			this.hide();
 		});
-		this.innerWrapper.on('click',(event)=>{
+		innerWrapper.on('click',(event)=>{
             event.stopPropagation();
 		});
-		this.closeBtn.on('click',()=>{
+		closeBtn.on('click',()=>{
 			this.hide();
 		});
-		this.fileBtn.on('change',()=>{
-			var self = this;
-			var url = getObjectURL(this.fileBtn.get(0).files[0]);
-			var image = new Image();
-			image.src = url;
-            imageUrl = url;
-            getInputFile(this.fileBtn.get(0));
-			this.imageBox.empty().append(image);
 
-			image.onload=function () {
-				if($jcrop){
-					$jcrop.destroy();
-					$jcrop = null;
-				}
-				self.scale = $(this).width()/image.naturalWidth;
-				$(image).Jcrop({
-					aspectRatio : 1,
-					allowSelect: false,
-					allowMove: true,
-					allowResize:true,
-					onChange : self._setCropData.bind(self),
-					onSelect : self._setCropData.bind(self),
-				},function () {
-					$jcrop = this;
-					var dim = $jcrop.getWidgetSize();
-					var selectSize = Math.min.apply(null, dim)*0.8;
-					this.animateTo([(dim[0]-selectSize)/2,(dim[1]-selectSize)/2,(dim[0]+selectSize)/2,(dim[1]+selectSize)/2])
-					$('.requiresjcrop').show();
-					console.log(self.scale);
-				});
-			}
+		//当使用的是Ie9及以下版本，提示浏览器版本过低
+		if(Ipmph.Browser.ie&&Ipmph.Browser.ie<10){
+			noSupportNoice.show(0);
+			isSupport = false;
+			submitBtn.attr('disabled','true');
+		}
 
-		});
-		this.submitBtn.on('click',()=>{
-			if(!imageUrl){
-                Ipmph.message.error('请选择一张图片');
-                return false;
-			}
-			this.logdingShow();
-            setTimeout(()=>{
-                this.trigger('uploadImageSuccess',imageUrl);
-                this.loadingHide().hide();
-                Ipmph.message.success('上传成功');
-            },3000)
-		});
 	};
 	context.logdingShow=function () {
-		this.loading.show(0);
+		loading.show(0);
         return this;
     };
 	context.loadingHide=function () {
-		this.loading.hide(0);
+		loading.hide(0);
 		return this;
     };
 	context.show=function () {
-		this.$cropWraper.fadeIn(280);
+		$cropWraper.fadeIn(280);
         return this;
 	};
 	context.hide=function () {
-		this.$cropWraper.fadeOut(280);
-        $jcrop.destroy();
-        $jcrop = null;
-        this.imageBox.empty();
-        this.fileBtn.val('');
-        imageUrl=null;
+		$cropWraper.fadeOut(280);
         return this;
 	};
 	context.getImageUrl=function () {
 		return imageUrl;
 	};
-	context._setCropData=function(obj) {
-		$("#x").val(obj.x/this.scale);
-		$("#y").val(obj.y/this.scale);
-		$("#w").val(obj.w/this.scale);
-		$("#h").val(obj.h/this.scale);
-        return this;
+
+
+	//监听上传文件操作
+	fileBtn.on("change", function () {
+
+		//如果是ie9,ie9则直接上传
+		if(!isSupport){
+
+			uploadImage({'file':this},function () {
+				Ipmph.message.success('上传成功');
+				context.trigger('upload_success','http://119.254.226.115/pmph_imesp/upload/sys_userext_avatar/1706/20170623191553876.png');
+				context.hide();
+			});
+			return false;
+		}
+
+		var fr = new FileReader();
+		var file = this.files[0];
+
+		if (!/image\/\w+/.test(file.type)) {
+			showTips(file.name + "不是图片文件！");
+			return false;
+		} else if (file.size > 2 * 1024 * 1024) {
+			showTips('图片大小不能超过2M');
+			return false;
+		}
+		fr.readAsDataURL(file);
+		fr.onload = function () {
+			//这里初始化cropper
+			cropImage.attr('src',fr.result);
+			cropper.reset().replace(fr.result);
+		};
+	});
+	submitBtn.on('click',function () {
+		$("#registerForm").attr("enctype","multipart/form-data");
+		var formData = new FormData($("#registerForm")[0]);
+		var imageData = cropper.getCroppedCanvas().toDataURL('image/jpg');
+		formData.append("imgBase64",imageData);//
+		formData.append("fileFileName","photo.jpg");
+
+		uploadImage(formData,function () {
+			Ipmph.message.success('上传成功');
+			context.trigger('upload_success',imageData);
+			context.hide();
+		});
+	});
+	
+	function uploadImage(formData,callback) {
+		$.ajax({
+			url:'/upload/userhead',
+			type:'POST',
+			data:formData,
+			timeout:10000,
+			contentType: false,
+			processData: false,
+			success(){},
+			error(){},
+			complete(){
+				callback&&callback();
+			},
+		})
 	}
 
 	context.init();
-
 	return context;
 })();
 
