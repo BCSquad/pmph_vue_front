@@ -7,6 +7,9 @@ var myMessageNotice = {
 		var $html = $(html);
 		$(selector).html($html);
 	},
+	init(dataList){
+
+	},
 };
 
 module.exports = myMessageNotice;

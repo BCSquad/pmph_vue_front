@@ -260,10 +260,10 @@ body{
   }
 }
 /*鼠标悬浮显示提示文案*/
-.hoverTips{
+.toolTip{
   position:relative;
   &:hover:after{
-    content:attr(data-msg);
+    content:attr(data-tips);
     display: inline-block;
     position:absolute;
     font-size: $font-size-small;

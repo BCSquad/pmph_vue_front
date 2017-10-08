@@ -47,6 +47,7 @@ var imageCrop = (function () {
 		//将元素插入文档
 		$('body').append($cropWraper);
 		//事件绑定
+
 		$cropWraper.on('click',()=>{
 			this.hide();
 		});
@@ -105,10 +106,10 @@ var imageCrop = (function () {
 		var file = this.files[0];
 
 		if (!/image\/\w+/.test(file.type)) {
-			showTips(file.name + "不是图片文件！");
+			Ipmph.message.error("您上传的不是图片文件！");
 			return false;
 		} else if (file.size > 2 * 1024 * 1024) {
-			showTips('图片大小不能超过2M');
+            Ipmph.message.error('图片大小不能超过2M');
 			return false;
 		}
 		fr.readAsDataURL(file);

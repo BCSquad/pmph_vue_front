@@ -17,7 +17,7 @@
   .my-message-notice-dropdown{
     position: absolute;
     top:0;
-    left: 0;
+    right: 0;
     width: 294px;
     height: 0;
     overflow: hidden;
@@ -64,22 +64,34 @@
     -webkit-border-radius: 2px;
     float: left;
     margin-right: 10px;
+    margin-top: 5px;
     width: 11%;
   }
-  .my-message-notice-userhead .time {
+  .my-message-notice-username .time {
     font-size: 11px;
     font-style: italic;
     font-weight: 700;
     position: absolute;
     right: 35px;
   }
-  .my-message-notice-userhead .message{
+.my-message-notice-iterm .my-message-notice-username{
+  font-size: 12px;
+  line-height: 1.42;
+  color: #5a738e;
+  display: block;
+  padding: 4px 8px;
+  background: #f7f7f7;
+}
+  .my-message-notice-iterm .message{
     display: block!important;
   }
-  .my-message-notice-userhead .message-all{
+  .my-message-notice-iterm .message-all{
     text-align: center;
     font-weight: 700;
     padding: 8px 8px;
   }
+}
+#message-all{
+  display: none;
 }
 
