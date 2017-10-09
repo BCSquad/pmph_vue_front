@@ -27,17 +27,20 @@ p{word-wrap:break-word}
 /*=================================================================
   padding margin
   =================================================================*/
-@for $i from 0 through 60{
+@for $i from 0 through 90{
   @if $i % 10 == 0 {
     .paddingT#{$i}{padding-top: #{$i}px}
     .paddingL#{$i}{padding-left: #{$i}px}
     .paddingR#{$i}{padding-right: #{$i}px}
     .paddingB#{$i}{padding-bottom: #{$i}px}
+
     .marginT#{$i}{margin-top: #{$i}px}
     .marginL#{$i}{margin-left: #{$i}px}
     .marginR#{$i}{margin-right: #{$i}px}
     .marginB#{$i}{margin-bottom: #{$i}px}
+
     .padding#{$i}{padding: #{$i}px}
+
     .margin#{$i}{margin: #{$i}px}
   }
 }
@@ -46,7 +49,6 @@ p{word-wrap:break-word}
   color
   =================================================================*/
 .color-primary{color:$color-primary};
-
 .color-success{color:$color-success};
 .color-warning{color:$color-warning};
 .color-danger{color:$color-danger};
@@ -54,7 +56,6 @@ p{word-wrap:break-word}
 .color-white{color:$color-white};
 .color-black{color:$color-black};
 .color-blue{color:$color-blue}
-
 
 /*=================================================================
   font-size
@@ -230,16 +231,16 @@ body{
   background-color: rgba(0,0,0,.3);
   z-index: 1000;
   text-align: center;
-}
-.loading>img{
-  display: block;
-  position: relative;
-  top: 50%;
-  width: 31px;
-  height: 31px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -16px;
+  &>img{
+    display: block;
+    position: relative;
+    top: 50%;
+    width: 31px;
+    height: 31px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -16px;
+  }
 }
 
 /*加载文字后面的...动画*/

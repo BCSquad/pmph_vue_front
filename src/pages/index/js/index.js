@@ -54,13 +54,13 @@ require('../sass/layout.scss');
 // 	// 继承了Error类的对象
 // }
 
-var imageCrop = require('components/imageCrop/index.js')
+var imageCrop = require('components/imageCrop/index.js');
 $(function () {
 	Ipmph.UserModel.on(Ipmph.UserModel.eventType.LOGIN_SUCCESS,function (data) {
 		console.log('接收到登录成功事件');
 		Ipmph.message.success('接收到登录成功事件');
 		// console.log(data)
-	})
+	});
 
 	var options = {
 		totalPages: 100,
@@ -79,7 +79,7 @@ $(function () {
         imageCrop.show();
     });
 
-    imageCrop.on('upload_success',function (imageUrl) {
+    imageCrop.on('imageCrop:upload_success',function (imageUrl) {
 		var image = new Image();
         image.src = imageUrl;
         $('.page-main').append(image)

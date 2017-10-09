@@ -90,13 +90,13 @@ var imageCrop = (function () {
 	//监听上传文件操作
 	fileBtn.on("change", function () {
 
-		//如果是ie9,ie9则直接上传
+		//如果是ie9,及ie9一下版本则直接上传
 		if(!isSupport){
 			context.logdingShow();
 			uploadImage({'file':this},function () {
 				Ipmph.message.success('上传成功');
 				context.loadingHide();
-				context.trigger('upload_success','http://119.254.226.115/pmph_imesp/upload/sys_userext_avatar/1706/20170623191553876.png');
+				context.trigger('imageCrop:upload_success','http://119.254.226.115/pmph_imesp/upload/sys_userext_avatar/1706/20170623191553876.png');
 				context.hide();
 			});
 			return false;
@@ -130,7 +130,7 @@ var imageCrop = (function () {
 		uploadImage(formData,function () {
 			Ipmph.message.success('上传成功');
 			context.loadingHide();
-			context.trigger('upload_success',imageData);
+			context.trigger('imageCrop:upload_success',imageData);
 			context.hide();
 		});
 	});
