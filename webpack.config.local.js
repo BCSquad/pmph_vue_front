@@ -18,7 +18,7 @@ let replaceOtions = {
 var exports = {
 	devtool: "source-map",    //生成sourcemap,便于开发调试
 	entry:{
-		'common':['es5-shim','es5-shim/es5-sham','./src/common/index.js']
+		'base':['es5-shim','es5-shim/es5-sham','./src/base/index.js']
 	},
 	output:{
 		path:path.resolve(__dirname,'product-local'),
@@ -94,7 +94,7 @@ var exports = {
 			},
 			{
 				test: /\.css$/,
-				include:[path.resolve(__dirname,'src/common'),path.resolve(__dirname,'src/assets')],
+				include:[path.resolve(__dirname,'src/base')],
 				use: [
 					{loader: 'style-loader'},
 					{
@@ -115,7 +115,7 @@ var exports = {
 			},
 			{
 				test:/\.(scss)$/,
-				include:[path.resolve(__dirname,'src/common')],
+				include:[path.resolve(__dirname,'src/base')],
 				use: [
 					{loader: 'style-loader'},
 					{
@@ -156,13 +156,15 @@ var exports = {
 			node_modules	: __dirname + '/node_modules',
 			pages			: __dirname + '/src/pages',
 			components		: __dirname + '/src/components',
-			common			: __dirname + '/src/common'
+			common			: __dirname + '/src/common',
+			base			: __dirname + '/src/base',
+			static			: __dirname + '/src/static'
 		}
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
-        	name:'common',
-        	filename:'static/common/js/base.js'
+        	name:'base',
+        	filename:'static/base/js/base.js'
         }),
 		// new webpack.HotModuleReplacementPlugin(),
 		// new ExtractTextPlugin("static/[name].css"),
@@ -186,11 +188,10 @@ var exports = {
 		),
         new CopyWebpackPlugin([
             {
-                from: './src/assets',
-                to: 'static/assets'
+                from: './static',
+                to: 'static/static'
             }
         ]),
-		new MyReplaceLoaderPlugin(replaceOtions),
 		new MyReplaceLoaderPlugin(replaceOtions),
 		new OptimizeCSSPlugin({//css去重
 			cssProcessorOptions: {
@@ -227,7 +228,7 @@ files.forEach(function(item){
     var htmlPlugin = new HtmlWebpackPlugin({
         filename: outPutFile,
         template: "./src/pages/" +entryPath  + "index.html",
-        chunks:['common',entryPath + 'index']
+        chunks:['base',entryPath + 'index']
     });
     exports.plugins.push(htmlPlugin);
 

@@ -24,7 +24,7 @@ let replaceOtions = {
 var exports = {
     //devtool: "source-map",
 	entry:{
-		'common':['es5-shim','es5-shim/es5-sham','./src/common/index.js']
+		'base':['es5-shim','es5-shim/es5-sham','./src/base/index.js']
 	},
 	output:{
 		path:path.resolve(__dirname,'product'),
@@ -100,7 +100,7 @@ var exports = {
 			},
 			{
 				test: /\.css$/,
-				include:[path.resolve(__dirname,'src/common'),path.resolve(__dirname,'src/assets')],
+				include:[path.resolve(__dirname,'src/base')],
 				use: [
 					{loader: 'style-loader'},
 					{
@@ -121,7 +121,7 @@ var exports = {
 			},
 			{
 				test:/\.(scss)$/,
-				include:[path.resolve(__dirname,'src/common')],
+				include:[path.resolve(__dirname,'src/base')],
 				use: [
 					{loader: 'style-loader'},
 					{
@@ -162,13 +162,15 @@ var exports = {
 			node_modules	: __dirname + '/node_modules',
 			pages			: __dirname + '/src/pages',
 			components		: __dirname + '/src/components',
-			common			: __dirname + '/src/common'
+			common			: __dirname + '/src/common',
+			base			: __dirname + '/src/base',
+			static			: __dirname + '/src/static'
 		}
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
-        	name:'common',
-        	filename:'static/common/js/base.js'
+        	name:'base',
+        	filename:'static/base/js/base.js'
         }),
 		// new ExtractTextPlugin("static/[name].css"),
         new ExtractTextPlugin({
@@ -191,8 +193,8 @@ var exports = {
         ),
         new CopyWebpackPlugin([
             {
-                from: './src/assets',
-                to: 'static/assets'
+                from: './static',
+                to: 'static/static'
             }
         ]),
 		new MyReplaceLoaderPlugin(replaceOtions),
@@ -254,7 +256,7 @@ files.forEach(function(item){
         filename: outPutFile,
         template: "./src/pages/" +entryPath  + "index.html",
         // minify:!outputConfig.IS_DEBUG,
-        chunks:['common',entryPath + 'index']
+        chunks:['base',entryPath + 'index']
     });
     exports.plugins.push(htmlPlugin);
 
@@ -278,7 +280,7 @@ files.forEach(function(item){
                         plugins:function(){
                             return [
                                 require('postcss-import')(),        //一定要写在require("autoprefixer")前面，否则require("autoprefixer")无效
-                                require("autoprefixer")({browsers:['ie>=8','>1% in CN']})
+                                require("autoprefixer")({browsers:['ie>=8']})
                             ]
                         }
                     }

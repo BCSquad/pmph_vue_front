@@ -8,7 +8,7 @@ var proxyMiddleware = require('http-proxy-middleware')
 const app = express();
 webpackConfig = require('./webpack.config.local');
 
-webpackConfig.entry['common'].push('./dev-client.js');
+webpackConfig.entry['base'].push('./dev-client.js');
 webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 
